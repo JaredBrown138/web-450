@@ -1,0 +1,30 @@
+{
+    "employeeId": "23d14fs",
+    "name": "John Adams",
+    "isAdmin": "false",
+    "quizzes": [
+        {
+            "id": "378v3fn",
+            "title": "Questions on the Epoch",
+            "dateCreated": "01/01/1970",
+            "version": "0.0.1",
+            "questions": [
+                {
+                    "id": "fk937c",
+                    "content": "Wait, when is the epoch?",
+                    "answers": [
+                        {
+                            "id": "3784jfs",
+                            "content": "Right Now!",
+                            "isAnswer": "true"
+                        }
+                    ]
+                }
+            ],
+            "slideshow": {
+                "slideLength": "12",
+                "rescourcePath": "../resources/epoch"
+            }
+        }
+    ]
+}

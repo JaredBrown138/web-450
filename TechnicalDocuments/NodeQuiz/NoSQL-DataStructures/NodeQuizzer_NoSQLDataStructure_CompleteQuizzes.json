@@ -1,0 +1,25 @@
+{
+    "CompletedQuizzes": [
+        {
+            "id": "f93nf87",
+            "version": "0.0.1",
+            "score": "98",
+            "dateTaken": "01/01/1970",
+            "isVisible": "true",
+            "QuestionCompleted": [
+                {
+                    "id": "fk937c",
+                    "content": "Wait, when is the epoch?",
+                    "answers": [
+                        {
+                            "id": "3784jfs",
+                            "content": "Right Now!",
+                            "isAnswer": "true",
+                            "wasSelected": "true"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
