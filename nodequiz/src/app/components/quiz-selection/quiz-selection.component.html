@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+<mat-card class="select-container">
+  <div class="select-header">
+    <h3 class="select-header-text">Quiz Selection</h3>
+  </div>
+  <div class="quiz-selection-container">
+    <div class="selection-search">
+      <mat-icon class="search-logo">search</mat-icon>
+      <input class="quiz-search" type="text" placeholder="Search">
+    </div>
+
+    <div class="selections">
+      <div *ngFor="let item of availableQuizzes" [routerLink]="item.link" class="selection">
+        {{item.title}}
+      </div>
+
+    </div>
+  </div>
+</mat-card>

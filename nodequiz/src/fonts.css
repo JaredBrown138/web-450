@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Fugaz One';
+  src: url('/assets/fonts/Fugaz_One/FugazOne-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Dhurjati';
+  src: url('/assets/fonts/Dhurjati/Dhurjati-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('/assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+}

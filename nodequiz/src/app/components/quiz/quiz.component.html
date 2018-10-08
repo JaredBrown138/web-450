@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<mat-card class="quiz-container">
+  <div class="question-container">
+    <div *ngFor="let item of quiz; let i = index" class="question">
+      <div class="question-text">Question {{i + 1}}: {{item.question}}</div>
+      <div *ngFor="let answer of item.answers; let num = index" class="answer">
+        <mat-radio-button class="answer-radio">{{answer['a' + num]}}</mat-radio-button>
+      </div>
+    </div>
+
+  </div>
+</mat-card>
+
+<mat-card class="utility-screen">
+  <div class="utility-title">{{quizTitle}}</div>
+</mat-card>

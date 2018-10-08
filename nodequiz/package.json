@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng build && node ./bin/wwww",
+    "start": "ng build && node ./bin/www",
     "devstart": "node ./bin/www",
     "build": "ng build",
     "test": "ng test",

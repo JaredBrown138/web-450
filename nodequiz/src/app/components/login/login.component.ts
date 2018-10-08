@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
   employeeId: string;
 
-  constructor() {}
+  constructor(public router: Router) {}
 
   ngOnInit() {}
 
@@ -30,6 +31,6 @@ export class LoginComponent implements OnInit {
   }
 
   login(id: string) {
-    console.log(id);
+    this.router.navigateByUrl('/select');
   }
 }

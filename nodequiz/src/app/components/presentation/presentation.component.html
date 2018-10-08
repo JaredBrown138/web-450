@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+<mat-card class="slide-container">
+
+  <div class="content-container">
+    <div class="img-container">
+      <div (click)="regress()" class="left-arrow no-select">
+        <mat-icon class="arrow-logo">arrow_left</mat-icon>
+      </div>
+      <div (click)="advance()" class="right-arrow no-select">
+        <mat-icon class="arrow-logo">arrow_right</mat-icon>
+      </div>
+      <img class="slide-img" [src]="currentResourceURL">
+    </div>
+  </div>
+  <div class="menu">
+    <div class="slide-header">
+      <h3 class="slide-header-text">Slide Presentation</h3>
+    </div>
+    <div (click)="takeQuiz()" class="menu-options">Take Quiz</div>
+  </div>
+
+
+</mat-card>
