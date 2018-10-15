@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng build && node ./bin/www",
     "devstart": "node ./bin/www",
+    "live": "nodemon server/app.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

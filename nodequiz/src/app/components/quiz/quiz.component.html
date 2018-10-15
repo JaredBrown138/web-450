@@ -2,15 +2,45 @@
 <mat-card class="quiz-container">
   <div class="question-container">
     <div *ngFor="let item of quiz; let i = index" class="question">
-      <div class="question-text">Question {{i + 1}}: {{item.question}}</div>
-      <div *ngFor="let answer of item.answers; let num = index" class="answer">
-        <mat-radio-button class="answer-radio">{{answer['a' + num]}}</mat-radio-button>
-      </div>
+
+      <div [class]="getClass(i)">Question {{i + 1}}: {{ item[i] }}</div>
+
+      <mat-radio-group [(ngModel)]="answers[i]" (ngModelChange)="calculateAnswered()">
+
+        <div *ngFor="let answer of item.answers; let num = index" class="answer">
+          <mat-radio-button [disabled]="isDisabled()" [value]="answer['a' + num]" class="answer-radio">
+            {{answer['a'+num]}}
+          </mat-radio-button>
+
+        </div>
+      </mat-radio-group>
+
     </div>
 
   </div>
 </mat-card>
 
 <mat-card class="utility-screen">
+  <mat-icon class="menu-logo">menu</mat-icon>
   <div class="utility-title">{{quizTitle}}</div>
+  <div class="info-box">
+
+    <div *ngIf="!submited" class="questions-answered">{{questionsCompleted + "/10"}}</div>
+    <div *ngIf="!submited" class="subtext">Questions Answered</div>
+
+    <div *ngIf="submited" class="questions-answered">{{score}}</div>
+    <div *ngIf="submited" class="subtext">Quiz Score</div>
+
+    <div *ngIf="!submited" class="buttons-container">
+      <button [routerLink]="['/select']" class="cancel-button quiz-button">Cancel</button>
+      <button (click)="submit()" class="submit-button quiz-button">Submit</button>
+    </div>
+
+    <div *ngIf="submited" class="buttons-container">
+      <button class="cancel-button quiz-button" [routerLink]="['/select']">Quizzes</button>
+      <button [routerLink]="['/scores']" class="submit-button quiz-button">Past Scores</button>
+    </div>
+
+  </div>
+
 </mat-card>

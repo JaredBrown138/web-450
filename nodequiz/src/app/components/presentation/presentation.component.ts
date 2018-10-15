@@ -27,7 +27,9 @@ export class PresentationComponent implements OnInit {
   ) {
     this.currentSlide = 1;
     this.quizId = this.activatedRoute.snapshot.params['id'];
+    
     this.presentationObject = demoService.getPresentationInfo(this.quizId);
+
     this.currentResourceURL =
       this.presentationObject.path + this.currentSlide + this.suffix;
   }

@@ -1,0 +1,33 @@
+<app-navbar></app-navbar>
+
+<div fxLayout="row">
+  <div class="grade-container container" fxFlex="40%">
+    <mat-card class="score-card">
+
+      <div class="score-box">
+        {{average}}
+        <div class="subtext">Cumulative <br> Average</div>
+      </div>
+
+      <div class="taken-box">
+        Tests Taken: {{testsTaken}}
+      </div>
+
+    </mat-card>
+  </div>
+  <div class="quizzes-container container" fxFlex="60%">
+    <mat-card class="tests-card">
+      <div class="recents-titles">Recent Quizzes</div>
+      <div class="recents-container">
+        <div class="lists">
+          <div *ngFor="let item of recentQuizzes" [routerLink]="item.link" class="selection">
+            {{item.title}} <div class="score-right">{{item.score}}</div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </mat-card>
+  </div>
+</div>

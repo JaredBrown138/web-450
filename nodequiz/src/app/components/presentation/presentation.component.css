@@ -1,6 +1,6 @@
 .slide-container {
   position: relative;
-  width: 80%;
+  width: 92%;
   margin: auto;
   margin-top: 40px;
   height: auto;
@@ -10,7 +10,7 @@
 }
 .slide-header {
   padding: 10px;
-  background-color: #36e1b2;
+  background-color: #7640b3;
   color: white;
   margin-bottom: 30px;
   border-radius: 5px;
@@ -25,7 +25,7 @@
 }
 .img-container {
   position: relative;
-  width: 63.7%;
+  width: 87.7%;
   margin-top: 20px;
   height: auto;
   margin: auto;
@@ -58,6 +58,9 @@
   height: auto;
   font-size: 190px;
 }
+.arrow-logo:active {
+  color: lightgray;
+}
 .content-container {
   width: 75%;
   display: inline-block;
@@ -75,8 +78,8 @@
   margin: auto;
   padding: 20px;
   text-align: center;
-  border: 2px solid #36e1b2;
-  color: #36e1b2;
+  border: 2px solid #7640b3;
+  color: #7640b3;
   border-radius: 3px;
   cursor: pointer;
 }

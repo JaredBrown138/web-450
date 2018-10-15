@@ -10,7 +10,7 @@
 }
 .select-header {
   padding: 10px;
-  background-color: #36e1b2;
+  background-color: #7640b3;
   color: white;
   border-radius: 5px;
 }
@@ -62,10 +62,10 @@
   border: 2px solid rgb(233, 233, 233) !important;
 }
 .selection:hover {
-  border: 2px solid #36e1b2;
+  border: 2px solid #7640b3;
 }
 .selection:nth-of-type(odd):hover {
-  border: 2px solid #36e1b2 !important;
+  border: 2px solid #7640b3 !important;
 }
 .no-results {
   width: 100%;
