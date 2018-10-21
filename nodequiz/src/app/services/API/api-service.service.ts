@@ -11,16 +11,19 @@ export class APIService {
   apiRoot: string = "/api/";
   loggedIn: boolean;
   employeeId: string;
+  isAdmin: boolean;
   testsTaken: number;
   avgScore: number;
   name: string;
   completedQuizzes: any;
+  quizStats: any;
 
-  availableQuizzes: Array<object>;
+  availableQuizzes: any;
 
   constructor(public http: HttpClient) {
     this.loggedIn = false;
     this.name = "username";
+    this.isAdmin = false;
   }
 
   sendGetRequest(endpoint) {
@@ -40,9 +43,16 @@ export class APIService {
       console.log("cleared");
       this.loggedIn = true;
       this.employeeId = response['employeeId'];
+      this.isAdmin = response['isAdmin'];
       this.name = response["name"];
       this.testsTaken = response["quizzesCompleted"];
       this.getCompletedQuizes().subscribe(x => { this.completedQuizzes = x });
+      this.getQuizzes().subscribe(res => {
+        this.getQuizStats(res).subscribe(response => {
+          this.quizStats = response;
+        })
+      });
+
 
       if (response['quizzesCompleted'] == 0) {
         this.avgScore = 0;
@@ -64,7 +74,7 @@ export class APIService {
     return this.loggedIn;
   }
 
-  submitTest(completedTestObject: Object): Observable<object> {
+  submitTest(completedTestObject: Object): Observable<any> {
     return this.http.post('/api/submit', completedTestObject);
   }
 
@@ -84,5 +94,42 @@ export class APIService {
     }));
   }
 
+  getQuizzes(): Observable<object> {
+    return this.sendGetRequest("quiz").pipe(map(response => {
+      this.availableQuizzes = response;
+      return response;
+    }));
+  }
+
+  getUsers(): Observable<object> {
+    return this.sendGetRequest("user/").pipe(map(response => {
+      return response;
+    }));
+  }
+  getAdminStatus() {
+    return this.isAdmin;
+  }
+  userReset(employeeId): Observable<object> {
+    return this.sendGetRequest("reset/" + employeeId).pipe(map(response => {
+      return response;
+    }));
+  }
+  getQuizStats(availableQuizzes) {
+    let reqObject = {};
+    reqObject['quizzes'] = [];
+
+    availableQuizzes.forEach(element => {
+      let quizObject = {}
+      quizObject['quizId'] = element['quizId']
+      quizObject['title'] = element['title'];
+      reqObject['quizzes'].push(quizObject);
+    });
+    return this.http.post('/api/quizstats', reqObject).pipe(map(response => {
+      console.log('response');
+      return response;
+    }));
+
+
+  }
 
 }

@@ -17,8 +17,8 @@ exports.index = function (req, res, next) {
     });
 
     submission.save(err => {
-        if (err) return res.status(500).send(err);
-        return res.status(200).send("done");
+        if (err) return res.status(500).send({ message: err });
+        return res.status(200).send({ message: "Saved" });
     });
 
 };

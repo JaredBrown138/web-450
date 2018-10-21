@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       let loggedIn = this.api.login(res);
       if (loggedIn == true) {
         console.log("123");
-        this.router.navigateByUrl('/select');
+        this.router.navigateByUrl('/dashboard');
         console.log("go");
       } else {
         this.userMessage = "User Not Found";

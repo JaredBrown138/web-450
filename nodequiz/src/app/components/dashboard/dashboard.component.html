@@ -1,0 +1,119 @@
+<app-navbar></app-navbar>
+<div fxLayout="row">
+  <div class="info-container" fxFlex="50%">
+
+    <mat-card class="select-container">
+
+      <div class="select-header">
+        <h3 class="select-header-text">Start A Quiz</h3>
+      </div>
+
+      <div class="quiz-selection-container">
+
+        <div class="selections">
+          <div *ngFor="let item of quizzes" (click)="getPath(item.quizId)" class="selection">
+            {{item.title}}
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <button class="bottom-button" [routerLink]="['/select']">
+        <p class="button-text">All Quizzes</p>
+        <mat-icon class="arrow">arrow_forward</mat-icon>
+      </button>
+
+    </mat-card>
+
+  </div>
+  <div class="info-container" fxFlex="50%">
+    <mat-card class="select-container">
+
+      <div class="score-box">
+        <div class="score-info">
+          {{prepareAvg(score)}}
+          <div class="subtext">Cumulative <br> Average</div>
+        </div>
+      </div>
+
+      <button class="bottom-button" [routerLink]="['/scores']">
+        <p class="button-text">Detailed Score Info</p>
+        <mat-icon class="arrow">arrow_forward</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+
+</div>
+<mat-card *ngIf="api.getAdminStatus()" class="tests-card">
+  <div class="recents-titles">Admin Panel</div>
+  <div fxLayout="row" class="recents-container">
+    <div class="lists" fxFlex="50%">
+
+      <table mat-table [dataSource]="users" class="user-table">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+          <td mat-cell *matCellDef="let user"> {{user.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="employeeId">
+          <th mat-header-cell *matHeaderCellDef> EmployeeID </th>
+          <td mat-cell *matCellDef="let user"> {{user.employeeId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quizzesCompleted">
+          <th mat-header-cell *matHeaderCellDef> Quizzes Completed</th>
+          <td mat-cell *matCellDef="let user"> {{user.quizzesCompleted}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="avgScore">
+          <th mat-header-cell *matHeaderCellDef>Average Score</th>
+          <td [appColorGrading]="user.avgScore" mat-cell *matCellDef="let user">
+            {{prepareAvg(user.avgScore).toPrecision(3)}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="reset">
+          <th mat-header-cell class="reset-header" *matHeaderCellDef>Reset User</th>
+          <td mat-cell class="reset-data" *matCellDef="let user">
+            <mat-icon (click)="reset(user.employeeId)" class="reset-user">delete_sweep</mat-icon>
+          </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+    </div>
+    <div class="lists" fxFlex="50%">
+      <table mat-table [dataSource]="api.quizStats" class="user-table">
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Quiz Name </th>
+          <td mat-cell *matCellDef="let quiz"> {{quiz.title}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quizId">
+          <th mat-header-cell *matHeaderCellDef> QuizID </th>
+          <td mat-cell *matCellDef="let quiz"> {{quiz.quizId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="avgScore">
+          <th mat-header-cell *matHeaderCellDef>Average Score</th>
+          <td [appColorGrading]="quiz.avgScore" mat-cell *matCellDef="let quiz">
+            {{prepareAvg(quiz.avgScore).toPrecision(3)}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="dataColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: dataColumns;"></tr>
+
+      </table>
+    </div>
+
+  </div>
+
+</mat-card>

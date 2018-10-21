@@ -38,4 +38,10 @@ export class CumulativeGradesComponent implements OnInit {
     });
 
   }
+  prepareAvg(avg) {
+    if (avg == 999) {
+      return 0;
+    }
+    return avg;
+  }
 }

@@ -11,3 +11,7 @@ module.exports.getById = (employeeId, callback) => {
   var query = { employeeId: employeeId };
   User.findOne(query, callback);
 };
+module.exports.getAll = (callback) => {
+  var query = {};
+  User.find(query, callback);
+};

@@ -23,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CumulativeGradesComponent } from './components/cumulative-grades/cumulative-grades.component';
 import { UnfinishedQuizGuard } from './modules/routing/unfinished-quiz.guard';
 import { ColorGradingDirective } from './directives/color-grading.directive';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
