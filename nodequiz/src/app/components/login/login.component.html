@@ -13,13 +13,17 @@
 
       <h1 class="card-title">NodeQuizzer</h1>
       <mat-form-field class="employee-id">
-        <input matInput placeholder="Employee ID (7 AlphaNum Chars)" [(ngModel)]="employeeId" pattern="^[a-zA-Z0-9]+$">
+        <input matInput placeholder="Employee ID" [(ngModel)]="employeeId" pattern="^[a-zA-Z0-9]+$">
       </mat-form-field>
       <button class="submit-button" (click)="attemptLogin()">
         <mat-icon>arrow_forward</mat-icon>
       </button>
 
-      <div class="demo">Demo Mode Enabled</div>
+      <div class="demo incorrect">{{userMessage}}</div>
+
+      <br>
+
+      <div class="demo">Possible User IDs: <span (click)="login('abc1234')">abc1234</span>, abc5678, abc4321 </div>
 
     </div>
 

@@ -4,12 +4,12 @@
   </div>
 
   <div class="rightside-items">
-    <div class="name-container">
+    <div [routerLink]="['/scores']" matTooltip="View Past Scores" class="name-container">
       <p class="username">{{username}}</p>
     </div>
 
-    <div class="options-container">
-      <mat-icon class="settings-logo">settings</mat-icon>
+    <div (click)="logout()" matTooltip="Logout" class="options-container">
+      <mat-icon class="settings-logo">meeting_room</mat-icon>
     </div>
   </div>
 </div>

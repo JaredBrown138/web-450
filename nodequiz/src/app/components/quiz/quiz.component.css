@@ -1,8 +1,9 @@
 .quiz-container {
-  width: 60%;
+  width: 95%;
   margin: auto;
   position: relative;
   top: 30px;
+  max-width: 1100px;
 }
 .question-container {
   padding: 20px;
@@ -84,8 +85,8 @@
   cursor: pointer;
 }
 .correct {
-  background-color: #32c432 !important;
+  background-color: #1ada89 !important;
 }
 .incorrect {
-  background-color: #ca311d !important;
+  background-color: #c84318 !important;
 }

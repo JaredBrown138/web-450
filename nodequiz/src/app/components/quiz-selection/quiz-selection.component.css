@@ -1,6 +1,7 @@
 .select-container {
   position: relative;
-  width: 50%;
+  width: 90%;
+  max-width: 960px;
   margin: auto;
   margin-top: 40px;
   height: 400px;

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { DemoService } from '../../services/Demo/demo.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import * as moment from 'moment';
+import { APIService } from '../../services/API/api-service.service';
+
 
 @Component({
   selector: 'app-cumulative-grades',
@@ -10,12 +12,30 @@ export class CumulativeGradesComponent implements OnInit {
   recentQuizzes: any;
   average: any;
   testsTaken: any;
+  displayedColumns = ['title', 'dateCompleted', 'score'];
 
-  constructor(demo: DemoService) {
-    this.recentQuizzes = demo.getRecentQuizzes();
-    this.average = demo.getAverage();
-    this.testsTaken = this.recentQuizzes.length;
+
+
+  constructor(public api: APIService) {
+    this.getStats();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+
+  }
+
+  formatDate(date) {
+    return moment(date).fromNow();
+  }
+
+  getStats() {
+    this.api.refreshStats().subscribe(response => {
+      this.average = response['avgScore'].toPrecision(3);
+      this.testsTaken = response['quizzesCompleted'];
+      this.api.getCompletedQuizes().subscribe(res => {
+        this.recentQuizzes = res;
+      });
+    });
+
+  }
 }

@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <mat-card class="quiz-container">
   <div class="question-container">
-    <div *ngFor="let item of quiz; let i = index" class="question">
+    <div *ngFor="let item of questions; let i = index" class="question">
 
       <div [class]="getClass(i)">Question {{i + 1}}: {{ item[i] }}</div>
 
@@ -28,7 +28,7 @@
     <div *ngIf="!submited" class="questions-answered">{{questionsCompleted + "/10"}}</div>
     <div *ngIf="!submited" class="subtext">Questions Answered</div>
 
-    <div *ngIf="submited" class="questions-answered">{{score}}</div>
+    <div *ngIf="submited" [appColorGrading]="score" class="questions-answered">{{score}}</div>
     <div *ngIf="submited" class="subtext">Quiz Score</div>
 
     <div *ngIf="!submited" class="buttons-container">

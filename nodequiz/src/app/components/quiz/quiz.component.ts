@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DemoService } from '../../services/Demo/demo.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { APIService } from '../../services/API/api-service.service';
+import { ColorGradingDirective } from '../../directives/color-grading.directive';
 
 @Component({
   selector: 'app-quiz',
@@ -9,7 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['./quiz.component.css']
 })
 export class QuizComponent implements OnInit {
-  quiz: Array<object>;
+  quiz: Object;
+  questions: Array<object>;
   quizId: any;
   quizTitle: any;
   answers: Array<string>;
@@ -17,27 +18,27 @@ export class QuizComponent implements OnInit {
   questionsCompleted: number = 0;
   submited: boolean = false;
   score: any;
+  numberOfQuestions: Number;
 
   constructor(
-    private demoService: DemoService,
     private activatedRoute: ActivatedRoute,
-    public http: HttpClientModule
+    public api: APIService
   ) {
-    this.answers = [];
     this.quizId = this.activatedRoute.snapshot.params['id'];
-    this.quizTitle = this.demoService.getQuizTitle(this.quizId);
-    this.demoSetup();
-    this.getActualAnswers();
+    this.api.sendGetRequest(('quiz/' + this.quizId)).subscribe((res) => {
+      this.quiz = res;
+      this.quizTitle = res['title'];
+      this.questions = res['questions'];
+      this.answers = [];
+      this.getActualAnswers();
+      this.numberOfQuestions = this.quiz['questions'].length;
+
+    })
+
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  demoSetup() {
-    let objectToDuplicate = this.demoService.getQuizInfo();
-
-    this.quiz = objectToDuplicate;
-    console.log(this.quiz);
-  }
 
   calculateAnswered() {
     this.questionsCompleted = 0;
@@ -47,7 +48,7 @@ export class QuizComponent implements OnInit {
   }
 
   getActualAnswers() {
-    this.quiz.forEach((x) => {
+    this.questions.forEach((x) => {
       this.actualAnswers.push(x['answer']);
     });
   }
@@ -83,11 +84,35 @@ export class QuizComponent implements OnInit {
     this.submited = true;
     window.scrollTo(0, 0);
     let correctQuestions = 0;
-    for (let x = 0; x < this.quiz.length; x++) {
+    for (let x = 0; x < this.questions.length; x++) {
       if (this.checkAnswer(x)) {
         correctQuestions++;
       }
     }
-    this.score = (correctQuestions / this.quiz.length) * 100;
+    this.score = (correctQuestions / this.questions.length) * 100;
+    console.log(this.buildSubmissionObject());
+    this.api.submitTest(this.buildSubmissionObject()).subscribe((res) => {
+      console.log(res);
+    });
+
+  }
+
+  buildSubmissionObject() {
+    let submissionObject = {};
+    submissionObject['employeeId'] = this.api.employeeId;
+    submissionObject['title'] = this.quiz['title'];
+    submissionObject['version'] = this.quiz['version'];
+    submissionObject['quizId'] = this.quizId;
+    submissionObject['score'] = this.score;
+    submissionObject['dateCompleted'] = new Date();
+    submissionObject['answers'] = [];
+    for (let x = 0; x < this.numberOfQuestions; x++) {
+      submissionObject['answers'][x] = {}
+      submissionObject['answers'][x]['question'] = this.quiz['questions'][x][x];
+      submissionObject['answers'][x]['answerGiven'] = this.answers[x];
+      submissionObject['answers'][x]['actualAnswer'] = this.actualAnswers[x];
+    }
+    return submissionObject;
+
   }
 }

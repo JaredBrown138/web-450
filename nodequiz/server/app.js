@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const logger = require('./helpers/logger');
 const mongoose = require('mongoose');
 const config = require('./helpers/config');
-const homeRouter = require('./routes/home-router');
+const apiCatalog = require('./routes/api-catalog');
 
 /**
  * MongoDB setup
@@ -42,8 +42,8 @@ app.use(express.static(path.join(__dirname, '../dist/nodequiz')));
 app.use('/', express.static(path.join(__dirname, '../dist/nodequiz')));
 app.use(morgan('dev'));
 
-app.use('/api', homeRouter); // wires the homeController to localhost:3000/api
-
+// wires the homeController to localhost:3000/api
+app.use('/api', apiCatalog);
 /**
  * Request handler
  */

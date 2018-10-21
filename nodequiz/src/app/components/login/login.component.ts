@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { APIService } from '../../services/API/api-service.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,14 +9,19 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   employeeId: string;
+  userMessage: string = "";
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, public api: APIService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   attemptLogin() {
-    if (this.checkEmployeeId(this.employeeId)) {
+    if (this.employeeId == undefined) {
+      this.userMessage = "Invalid User ID";
+    } else if (this.checkEmployeeId(this.employeeId)) {
       this.login(this.employeeId);
+    } else {
+      this.userMessage = "Invalid User ID";
     }
   }
 
@@ -31,6 +38,15 @@ export class LoginComponent implements OnInit {
   }
 
   login(id: string) {
-    this.router.navigateByUrl('/select');
+    this.api.verifyUser(id).subscribe(res => {
+      let loggedIn = this.api.login(res);
+      if (loggedIn == true) {
+        console.log("123");
+        this.router.navigateByUrl('/select');
+        console.log("go");
+      } else {
+        this.userMessage = "User Not Found";
+      }
+    })
   }
 }

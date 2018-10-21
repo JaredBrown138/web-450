@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SentinelService } from '../../services/Sentinel/sentinel.service';
+import { Router } from '@angular/router';
+import { APIService } from '../../services/API/api-service.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,15 @@ import { SentinelService } from '../../services/Sentinel/sentinel.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  username: string = this.sentinel.getUsername();
+  username: string = this.api.name;
 
-  constructor(private sentinel: SentinelService) {}
+  constructor(public api: APIService, public router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  logout() {
+    this.api.logout();
+    this.router.navigateByUrl('/');
+
+  }
 }

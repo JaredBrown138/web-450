@@ -20,10 +20,41 @@
       <div class="recents-titles">Recent Quizzes</div>
       <div class="recents-container">
         <div class="lists">
-          <div *ngFor="let item of recentQuizzes" [routerLink]="item.link" class="selection">
-            {{item.title}} <div class="score-right">{{item.score}}</div>
+          <!--<div *ngFor="let item of recentQuizzes" class="selection">
+            {{item.title}}
+            <div class="date">{{formatDate(item.dateCompleted)}}</div>
+            <div [appColorGrading]="item.score" class="score-right">{{item.score}}</div>
 
-          </div>
+          </div>-->
+          <table mat-table [dataSource]="recentQuizzes" class="quiz-table">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef> Quiz Name </th>
+              <td mat-cell *matCellDef="let quiz"> {{quiz.title}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="dateCompleted">
+              <th mat-header-cell *matHeaderCellDef> Date </th>
+              <td mat-cell *matCellDef="let quiz"> {{formatDate(quiz.dateCompleted)}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="score">
+              <th mat-header-cell *matHeaderCellDef> Score</th>
+              <td [appColorGrading]="quiz.score" mat-cell *matCellDef="let quiz"> {{quiz.score}} </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+
         </div>
 
       </div>
