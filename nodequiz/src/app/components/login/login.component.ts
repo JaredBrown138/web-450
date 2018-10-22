@@ -15,6 +15,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() { }
 
+  /**
+   * Check to see if the entered id is a valid format,
+   * if it is call login(), else set user message
+   * to invalid user id to alert user.
+   */
   attemptLogin() {
     if (this.employeeId == undefined) {
       this.userMessage = "Invalid User ID";
@@ -25,11 +30,17 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * A helper function which makes sure that the
+   * id is in a valid format using regex.
+   * @param id 
+   */
   checkEmployeeId(id: string) {
     if (id.length <= 6 || id.length >= 8) {
       return false;
     }
     let employeeIdRegex = RegExp('^[a-zA-Z0-9]+$');
+    //Why not just check length in Regex? - Who has time for that?
     if (!employeeIdRegex.test(id)) {
       return false;
     } else {
@@ -37,6 +48,10 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /**
+   * Logs the user in with a call to the API service.
+   * @param id 
+   */
   login(id: string) {
     this.api.verifyUser(id).subscribe(res => {
       let loggedIn = this.api.login(res);

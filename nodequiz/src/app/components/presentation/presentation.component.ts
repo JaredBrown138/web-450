@@ -27,15 +27,17 @@ export class PresentationComponent implements OnInit {
   ) {
     this.currentSlide = 1;
     this.quizId = this.activatedRoute.snapshot.params['id'] || "A001";
-
     this.presentationObject = demoService.getPresentationInfo(this.quizId);
-
     this.currentResourceURL =
       this.presentationObject.path + this.currentSlide + this.suffix;
   }
 
   ngOnInit() { }
 
+  /**
+   * Move back a slide, but obviously
+   * don't go backwards past 1
+   */
   regress() {
     if (this.currentSlide > 1) {
       this.currentSlide -= 1;
@@ -43,6 +45,12 @@ export class PresentationComponent implements OnInit {
         this.presentationObject.path + this.currentSlide + this.suffix;
     }
   }
+
+  /**
+   * Move forward by one slide, obviously
+   * dont progress if there are no
+   * more slides
+   */
   advance() {
     if (this.currentSlide < this.presentationObject.slideLen) {
       this.currentSlide += 1;
@@ -51,6 +59,9 @@ export class PresentationComponent implements OnInit {
     }
   }
 
+  /**
+   * Navigate the user to the quiz page
+   */
   takeQuiz() {
     this.router.navigateByUrl('/quiz/' + this.presentationObject.id);
   }

@@ -13,6 +13,10 @@ export class LoginGuard implements CanActivate {
 
     ) { }
 
+    /** If the user isn't logged in, don't allow them 
+     * to navigate to any component protected by this
+     * method.
+     */
     canActivate() {
         console.log(this.api.isLoggedIn());
         if (!this.api.isLoggedIn()) {

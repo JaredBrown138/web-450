@@ -1,5 +1,11 @@
 import { Directive, ElementRef, Input } from '@angular/core';
-
+/**
+ * A directive which allows me to style the color of
+ * numbers based on their value (0-100) numbers.
+ *
+ * @export
+ * @class ColorGradingDirective
+ */
 @Directive({
   selector: '[appColorGrading]'
 })
@@ -16,6 +22,11 @@ export class ColorGradingDirective {
     this.colorGrade(this.gradeValue);
   }
 
+  /**
+   * Determine what color to use based on a switch 
+   * statement.
+   * @param value 
+   */
   colorGrade(value: Number) {
     switch (true) {
       case (value >= 90):

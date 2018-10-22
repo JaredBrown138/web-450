@@ -23,11 +23,16 @@ export class CumulativeGradesComponent implements OnInit {
   ngOnInit() {
 
   }
-
+  /**
+   * Use moment.js to format the date
+   * @param date 
+   */
   formatDate(date) {
     return moment(date).fromNow();
   }
-
+  /**
+   * Grab the stats from the API service
+   */
   getStats() {
     this.api.refreshStats().subscribe(response => {
       this.average = response['avgScore'].toPrecision(3);
@@ -38,8 +43,12 @@ export class CumulativeGradesComponent implements OnInit {
     });
 
   }
+  /**
+   * Make sure that the average is displayed correctly
+   * @param avg 
+   */
   prepareAvg(avg) {
-    if (avg == 999) {
+    if (avg == 999 || avg == undefined || avg == null) {
       return 0;
     }
     return avg;

@@ -1,5 +1,12 @@
 var Quiz = require('../models/quiz');
 
+/**
+ * Returns all of the quizzes if not quiz is specificed (/api/quiz/A001)
+ * If specified, return that one quiz.
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.index = function (req, res, next) {
   if (req.params.id == undefined) {
     console.log("test");

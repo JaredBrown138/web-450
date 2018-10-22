@@ -20,6 +20,11 @@ export class QuizSelectionComponent implements OnInit {
 
   ngOnInit() { }
 
+  /**
+   * Filter the quizzes shown based on the user's
+   * input. Uses Regex. A pretty cool function if
+   * I do say so myself.
+   */
   filterQuizzes() {
     if (this.searchString == '' || this.searchString == ' ') {
       this.BuildQuizzesArray();
@@ -39,6 +44,10 @@ export class QuizSelectionComponent implements OnInit {
     }
   }
 
+  /**
+   * A helper function which basically
+   * resets the filteredQuizzes array.
+   */
   BuildQuizzesArray() {
     this.filteredQuizzes = []; //We have to be sure array is empty
     this.availableQuizzes.forEach((x) => {

@@ -35,16 +35,33 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  /**
+   * Navigate to the presentation page for the selected 
+   * quiz
+   * @param id 
+   */
   getPath(id) {
     this.router.navigateByUrl('/presentation/' + id);
   }
 
+  /**
+   * Format the average to be displayed
+   * @param avg 
+   */
   prepareAvg(avg) {
     if (avg == 999 || avg == null) {
       return 0;
     }
     return avg;
   }
+
+  /**
+   * Reset the users information using a call
+   * to the API Service, and then get the 
+   * new data.
+   * @param employeeId 
+   */
   reset(employeeId) {
     if (window.confirm('Are you sure?')) {
       this.api.userReset(employeeId).subscribe(res => {

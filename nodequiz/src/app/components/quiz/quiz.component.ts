@@ -41,7 +41,10 @@ export class QuizComponent implements OnInit {
 
   ngOnInit() { }
 
-
+  /**
+   * Calculates the number of questions that
+   * have been answered thus far
+   */
   calculateAnswered() {
     this.questionsCompleted = 0;
     this.answers.forEach((x) => {
@@ -49,11 +52,23 @@ export class QuizComponent implements OnInit {
     });
   }
 
+  /**
+   * iterate through the quiz object
+   * and extract actual (correct) answers
+   */
   getActualAnswers() {
     this.questions.forEach((x) => {
       this.actualAnswers.push(x['answer']);
     });
   }
+
+  /**
+   * returns the appropriate class based on
+   * whether or not the quiz has been submitted
+   * and whether or not the question was answered
+   * correctly
+   * @param question
+   */
   getClass(question) {
     if (!this.submited) {
       return 'question-text';
@@ -66,6 +81,10 @@ export class QuizComponent implements OnInit {
     }
   }
 
+  /**
+   * Disables the buttons once the quiz
+   * has been submitted
+   */
   isDisabled() {
     if (this.submited) {
       return 'true';
@@ -74,6 +93,13 @@ export class QuizComponent implements OnInit {
     }
   }
 
+  /**
+   * A helper function which determines if the 
+   * answer given is correct or not. The question
+   * is actual the index position, so the values
+   * of the index positions are compared.
+   * @param question 
+   */
   checkAnswer(question) {
     if (this.actualAnswers[question] === this.answers[question]) {
       return true;
@@ -82,6 +108,11 @@ export class QuizComponent implements OnInit {
     }
   }
 
+  /**
+   * Submits and checks the quiz. A call to the 
+   * API service is made to save the quiz to the 
+   * database via the API.
+   */
   submit() {
     this.submited = true;
     window.scrollTo(0, 0);
@@ -99,6 +130,11 @@ export class QuizComponent implements OnInit {
 
   }
 
+  /**
+   * A Helper function which maps local values
+   * to a object which will be sent to the API 
+   * to save the quiz submission.
+   */
   buildSubmissionObject() {
     let submissionObject = {};
     submissionObject['employeeId'] = this.api.employeeId;
@@ -118,6 +154,10 @@ export class QuizComponent implements OnInit {
 
   }
 
+  /**
+   * Toggles the utility card using a bool
+   * flag. 
+   */
   toggleUtilCard() {
     if (this.utilToggle) {
       this.utilToggle = false;

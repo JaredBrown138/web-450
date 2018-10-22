@@ -1,7 +1,16 @@
 var User = require('../models/user');
-
+/**
+ * Returns either all of the users or a specific
+ * user.
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 exports.index = function (req, res, next) {
 
+  /** 
+   * If no user id is supplied, return all users
+ */
   if (req.params.id == undefined) {
     console.log("test");
     User.getAll(function (err, quizzes) {
@@ -14,7 +23,9 @@ exports.index = function (req, res, next) {
     });
 
   } else {
-
+    /** 
+     * If userId is supplied, fetch that record
+     */
     User.getById(req.params.id, function (err, user) {
       if (err) {
         res.status(500).send({ authenticated: false });
