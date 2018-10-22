@@ -1,0 +1,21 @@
+{
+    "Quizzes": [
+        {
+            "quizId": "378v3fn",
+            "title": "Questions on the Epoch",
+            "dateCreated": "01/01/1970",
+            "version": "0.0.1",
+            "questions": [
+                {
+                    "0": "When is groundhog day?",
+                    "answer": "Feburary 2",
+                    "answers": [
+                        {
+                            "0": "Feburary 2"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
