@@ -90,3 +90,9 @@
 .incorrect {
   background-color: #c84318 !important;
 }
+.quiz-button:focus{
+  color: white;
+  background-color: #7640b3;
+  border: 2px solid white;
+
+}

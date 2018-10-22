@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DemoService } from '../../services/Demo/demo.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quiz-selection',
@@ -19,7 +18,7 @@ export class QuizSelectionComponent implements OnInit {
     this.searchString = '';
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   filterQuizzes() {
     if (this.searchString == '' || this.searchString == ' ') {

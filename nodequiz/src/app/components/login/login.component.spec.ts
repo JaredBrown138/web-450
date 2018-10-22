@@ -1,12 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { BrowserModule } from '@angular/platform-browser';
-
-import { FormsModule } from '@angular/forms';
 import { LoginComponent } from '../login/login.component';
-import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material/icon';
+import { imports } from '../../services/Util/util.imports';
+import { declarations } from '../../services/Util/util.imports';
+import { providers } from '../../services/Util/util.imports';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -14,8 +10,9 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginComponent],
-      imports: [BrowserModule, MatInputModule, BrowserAnimationsModule, MatIconModule, FormsModule]
+      declarations: [LoginComponent, declarations],
+      imports: [imports],
+      providers: [providers]
     }).compileComponents();
   }));
 
@@ -32,4 +29,12 @@ describe('LoginComponent', () => {
   it('checkEmployeeId returns false for invalid Id formats', () => {
     expect(component.checkEmployeeId('dj320f')).toBeFalsy();
   });
+
+  it('UserMessage should indicate a wrong userId for incorrect userIds', () => {
+    component.employeeId = "12fd3s3312";
+    component.attemptLogin();
+    expect(component.userMessage).toEqual("Invalid User ID");
+  });
+
+
 });

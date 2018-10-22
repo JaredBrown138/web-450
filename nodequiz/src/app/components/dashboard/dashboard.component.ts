@@ -46,17 +46,20 @@ export class DashboardComponent implements OnInit {
     return avg;
   }
   reset(employeeId) {
-    this.api.userReset(employeeId).subscribe(res => {
-      this.api.refreshStats().subscribe(res => {
-        this.score = res['avgScore'].toPrecision(3);
-      });
-      if (this.api.isAdmin == true) {
-        this.api.getUsers().subscribe(res => {
-          this.users = res;
-          console.log(this.users);
+    if (window.confirm('Are you sure?')) {
+      this.api.userReset(employeeId).subscribe(res => {
+        this.api.refreshStats().subscribe(res => {
+          this.score = res['avgScore'].toPrecision(3);
         });
-      }
-    })
+        if (this.api.isAdmin == true) {
+          this.api.getUsers().subscribe(res => {
+            this.users = res;
+            console.log(this.users);
+          });
+        }
+      });
+    }
+
   }
 
 }

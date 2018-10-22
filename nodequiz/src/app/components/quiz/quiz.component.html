@@ -21,15 +21,15 @@
 </mat-card>
 
 <mat-card class="utility-screen">
-  <mat-icon class="menu-logo">menu</mat-icon>
+  <mat-icon (click)="toggleUtilCard()" class="menu-logo">menu</mat-icon>
   <div class="utility-title">{{quizTitle}}</div>
-  <div class="info-box">
+  <div *ngIf="utilToggle" class="info-box">
 
     <div *ngIf="!submited" class="questions-answered">{{questionsCompleted + "/10"}}</div>
     <div *ngIf="!submited" class="subtext">Questions Answered</div>
 
     <div *ngIf="submited" [appColorGrading]="score" class="questions-answered">{{score}}</div>
-    <div *ngIf="submited" class="subtext">Quiz Score</div>
+    <div *ngIf="submited" [appColorGrading]="score" class="subtext">Quiz Score</div>
 
     <div *ngIf="!submited" class="buttons-container">
       <button [routerLink]="['/select']" class="cancel-button quiz-button">Cancel</button>

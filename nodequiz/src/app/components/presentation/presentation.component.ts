@@ -26,15 +26,15 @@ export class PresentationComponent implements OnInit {
     public router: Router
   ) {
     this.currentSlide = 1;
-    this.quizId = this.activatedRoute.snapshot.params['id'];
-    
+    this.quizId = this.activatedRoute.snapshot.params['id'] || "A001";
+
     this.presentationObject = demoService.getPresentationInfo(this.quizId);
 
     this.currentResourceURL =
       this.presentationObject.path + this.currentSlide + this.suffix;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   regress() {
     if (this.currentSlide > 1) {

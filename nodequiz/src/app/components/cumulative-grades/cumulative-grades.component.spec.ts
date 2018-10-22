@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CumulativeGradesComponent } from './cumulative-grades.component';
+import { imports } from '../../services/Util/util.imports';
+import { declarations } from '../../services/Util/util.imports';
+import { providers } from '../../services/Util/util.imports';
 
 describe('CumulativeGradesComponent', () => {
   let component: CumulativeGradesComponent;
@@ -8,9 +11,11 @@ describe('CumulativeGradesComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CumulativeGradesComponent ]
+      declarations: [CumulativeGradesComponent, declarations],
+      imports: [imports],
+      providers: [providers]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

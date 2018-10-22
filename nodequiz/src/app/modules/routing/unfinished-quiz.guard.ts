@@ -10,7 +10,7 @@ export class UnfinishedQuizGuard implements CanDeactivate<QuizComponent> {
 
     canDeactivate(component: QuizComponent) {
         if (!component.submited) {
-            return window.confirm("Are you sure you want to leave? You have " + (10 - component.questionsCompleted) + " left.");
+            return window.confirm("Are you sure you want to leave? You have " + (10 - component.questionsCompleted) + " questions left.");
         }
         return true;
     }

@@ -19,11 +19,13 @@ export class QuizComponent implements OnInit {
   submited: boolean = false;
   score: any;
   numberOfQuestions: Number;
+  utilToggle: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     public api: APIService
   ) {
+    this.utilToggle = true;
     this.quizId = this.activatedRoute.snapshot.params['id'];
     this.api.sendGetRequest(('quiz/' + this.quizId)).subscribe((res) => {
       this.quiz = res;
@@ -114,5 +116,13 @@ export class QuizComponent implements OnInit {
     }
     return submissionObject;
 
+  }
+
+  toggleUtilCard() {
+    if (this.utilToggle) {
+      this.utilToggle = false;
+    } else {
+      this.utilToggle = true;
+    }
   }
 }

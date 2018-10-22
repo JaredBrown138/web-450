@@ -18,6 +18,7 @@ export class LoginGuard implements CanActivate {
         if (!this.api.isLoggedIn()) {
             alert("You're not logged in and will be redirected to Login page");
             this.router.navigate(["/login"]);
+            return false;
         }
         return true;
     }

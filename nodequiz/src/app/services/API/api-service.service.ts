@@ -85,6 +85,11 @@ export class APIService {
   refreshStats(): Observable<object> {
     return this.sendGetRequest("user/" + this.employeeId).pipe(map(response => {
       this.testsTaken = response["quizzesCompleted"];
+      this.getQuizzes().subscribe(res => {
+        this.getQuizStats(res).subscribe(response => {
+          this.quizStats = response;
+        })
+      });
       if (response['quizzesCompleted'] == 0) {
         this.avgScore = 0;
       } else {
